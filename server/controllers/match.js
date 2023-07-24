@@ -1,4 +1,6 @@
-import { formatTime } from '../utils/formatTime.js';
+import formatTime from '../utils/formatTime.js';
+import getPlayerSummaries from '../utils/getPlayerSummaries.js';
+import heroes from '../data/heroes.json' assert { type: 'json' };
 
 const getMatchDetails = async (req, res) => {
   const match_id = req.params.match_id;
@@ -9,10 +11,18 @@ const getMatchDetails = async (req, res) => {
       `https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/v1?match_id=${match_id}&key=${steamApiKey}`
     );
     const data = await response.json();
+    const steam32IDs = data.result.players.map((player) => player.account_id);
+    const idToNameMap = await getPlayerSummaries(steam32IDs);
+
     res.json({
       result: {
         ...data.result,
         duration: formatTime(data.result.duration),
+        players: data.result.players.map((player) => ({
+          ...player,
+          hero_name: heroes[player.hero_id].localized_name,
+          account_name: idToNameMap[player.account_id],
+        })),
       },
     });
   } catch (error) {

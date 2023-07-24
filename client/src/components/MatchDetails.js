@@ -6,8 +6,8 @@ const MatchDetails = ({ matchData }) => {
   }
 
   return (
-    <div className="flex bg-white rounded-lg shadow-md p-6">
-      <div className="w-2/3 pr-6">
+    <div className="flex flex-col justify-between md:flex-row bg-white rounded-lg shadow-md p-6">
+      <div className="pr-6">
         {matchData.radiant_name && matchData.dire_name && (
           <p className="text-xl font-semibold">
             {matchData.radiant_name} vs {matchData.dire_name}
@@ -23,7 +23,7 @@ const MatchDetails = ({ matchData }) => {
           <span>
             {matchData.players
               .filter((player) => player.team_number === 0)
-              .map((player) => `${player.account_id} (${player.hero_id})`)
+              .map((player) => `${player.account_name} (${player.hero_name})`)
               .join(', ')}
           </span>
         </p>
@@ -32,12 +32,12 @@ const MatchDetails = ({ matchData }) => {
           <span>
             {matchData.players
               .filter((player) => player.team_number === 1)
-              .map((player) => `${player.account_id} (${player.hero_id})`)
+              .map((player) => `${player.account_name} (${player.hero_name})`)
               .join(', ')}
           </span>
         </p>
       </div>
-      <div className="w-1/3">
+      <div className="mt-6 md:mt-0">
         <Minimap />
       </div>
     </div>
