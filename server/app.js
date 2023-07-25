@@ -1,3 +1,7 @@
+import fs from 'node:fs';
+import https from 'node:https';
+import http from 'node:http';
+
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -15,6 +19,23 @@ app.use(
 );
 app.use('/match', matchRoutes);
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+const isProduction = process.env.NODE_ENV === 'production';
+
+if (isProduction) {
+  const options = {
+    key: fs.readFileSync('./certs/private.key'),
+    cert: fs.readFileSync('./certs/faceit-helper_pro.crt'),
+    ca: [
+      fs.readFileSync('./certs/faceit-helper_pro-root.crt'),
+      fs.readFileSync('./certs/faceit-helper_pro-bundle.crt'),
+    ],
+  };
+
+  https.createServer(options, app).listen(port, () => {
+    console.log(`HTTPS Server is running on port ${port}`);
+  });
+} else {
+  http.createServer(app).listen(port, () => {
+    console.log(`HTTP Server is running on port ${port}`);
+  });
+}
