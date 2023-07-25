@@ -46,7 +46,12 @@ const MatchDetails = ({ matchData }) => {
         </p>
       </div>
       <div className="mt-6 md:mt-0">
-        <Minimap />
+        <Minimap
+          towerStatusRadiant={matchData.tower_status_radiant}
+          towerStatusDire={matchData.tower_status_dire}
+          barracksStatusRadiant={matchData.barracks_status_radiant}
+          barracksStatusDire={matchData.barracks_status_dire}
+        />
       </div>
     </section>
   );
@@ -67,6 +72,10 @@ MatchDetails.propTypes = {
         hero_name: PropTypes.string,
       })
     ),
+    tower_status_radiant: PropTypes.number,
+    tower_status_dire: PropTypes.number,
+    barracks_status_radiant: PropTypes.number,
+    barracks_status_dire: PropTypes.number,
   }),
 };
 
