@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
   const fetchMatchData = async () => {
@@ -15,6 +15,11 @@ const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
       }
 
       const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       setMatchData(data.result);
     } catch (err) {
       setError(err.message);
@@ -31,6 +36,13 @@ const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
       Get match data
     </button>
   );
+};
+
+FetchButton.propTypes = {
+  matchId: PropTypes.string.isRequired,
+  setMatchData: PropTypes.func.isRequired,
+  setIsLoading: PropTypes.func.isRequired,
+  setError: PropTypes.func.isRequired,
 };
 
 export default FetchButton;

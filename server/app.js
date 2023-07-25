@@ -4,10 +4,9 @@ import cors from 'cors';
 
 import matchRoutes from './routes/match.js';
 
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 5543;
-
-dotenv.config();
 
 app.use(cors());
 app.use('/match', matchRoutes);
