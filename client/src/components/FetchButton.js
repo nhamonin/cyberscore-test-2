@@ -22,6 +22,7 @@ const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
 
       setMatchData(data.result);
     } catch (err) {
+      setMatchData(null);
       setError(err.message);
     } finally {
       setIsLoading(false);
@@ -31,7 +32,12 @@ const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
   return (
     <button
       onClick={fetchMatchData}
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+      disabled={!matchId}
+      className={`font-bold py-2 px-4 rounded ml-4 text-white ${
+        matchId
+          ? 'bg-blue-500 hover:bg-blue-700'
+          : 'bg-blue-200 pointer-events-none'
+      }`}
     >
       Get match data
     </button>
