@@ -8,7 +8,11 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5543;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  })
+);
 app.use('/match', matchRoutes);
 
 app.listen(port, () => {

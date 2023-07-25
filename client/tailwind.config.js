@@ -16,8 +16,5 @@ module.exports = withAnimations({
       classes: ['bounce', 'heartBeat'],
     },
   },
-  plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('tailwindcss-animatecss'),
-  ],
+  plugins: [],
 });
