@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 const FetchButton = ({ matchId, setMatchData, setIsLoading, setError }) => {
   const fetchMatchData = async () => {
     setIsLoading(true);
+    setMatchData(null);
     setError(null);
 
     try {

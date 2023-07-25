@@ -1,52 +1,42 @@
 import PropTypes from 'prop-types';
 
-import positions from '../utils/positions';
+import config from '../minimapConfig';
 import generateBuildingStatus from '../utils/generateBuildingStatus';
 
-const Minimap = ({
-  towerStatusRadiant,
-  towerStatusDire,
-  barracksStatusRadiant,
-  barracksStatusDire,
-}) => {
+const buildingTypes = ['tower', 'barrack', 'ancient'];
+const teams = ['Radiant', 'Dire'];
+const colors = { Radiant: 'limegreen', Dire: 'darkgreen' };
+
+const Minimap = (props) => {
   return (
     <div
-      className="relative bg-center bg-cover w-[300px] h-[300px]"
+      className="relative bg-center bg-cover w-[400px] h-[400px]"
       style={{ backgroundImage: `url(/map.webp)` }}
     >
-      {generateBuildingStatus(
-        towerStatusRadiant,
-        positions.Radiant.towers,
-        'green',
-        'tower'
-      )}
-      {generateBuildingStatus(
-        barracksStatusRadiant,
-        positions.Radiant.barracks,
-        'green',
-        'barrack'
-      )}
-      {generateBuildingStatus(
-        towerStatusDire,
-        positions.Dire.towers,
-        'blue',
-        'tower'
-      )}
-      {generateBuildingStatus(
-        barracksStatusDire,
-        positions.Dire.barracks,
-        'blue',
-        'barrack'
+      {buildingTypes.map((type) =>
+        teams.map((team) =>
+          generateBuildingStatus(
+            props[`${type}Status${team}`],
+            config[type].positions[team],
+            colors[team],
+            type
+          )
+        )
       )}
     </div>
   );
 };
 
-Minimap.propTypes = {
-  towerStatusRadiant: PropTypes.number.isRequired,
-  towerStatusDire: PropTypes.number.isRequired,
-  barracksStatusRadiant: PropTypes.number.isRequired,
-  barracksStatusDire: PropTypes.number.isRequired,
-};
+Minimap.propTypes = buildingTypes.reduce(
+  (acc, type) =>
+    teams.reduce(
+      (acc2, team) => ({
+        ...acc2,
+        [`${type}Status${team}`]: PropTypes.number.isRequired,
+      }),
+      acc
+    ),
+  {}
+);
 
 export default Minimap;

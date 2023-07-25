@@ -30,7 +30,9 @@ const getMatchDetails = async (req, res) => {
         duration: formatTime(data.result.duration),
         players: data.result.players.map((player) => ({
           ...player,
-          hero_name: heroes[player.hero_id].localized_name,
+          hero_name:
+            heroes.find((hero) => hero.id === player.hero_id).localized_name ||
+            'Unknown',
           account_name: idToNameMap[player.account_id],
         })),
       },

@@ -49,8 +49,10 @@ const MatchDetails = ({ matchData }) => {
         <Minimap
           towerStatusRadiant={matchData.tower_status_radiant}
           towerStatusDire={matchData.tower_status_dire}
-          barracksStatusRadiant={matchData.barracks_status_radiant}
-          barracksStatusDire={matchData.barracks_status_dire}
+          barrackStatusRadiant={matchData.barracks_status_radiant}
+          barrackStatusDire={matchData.barracks_status_dire}
+          ancientStatusRadiant={+matchData.radiant_win}
+          ancientStatusDire={+!matchData.radiant_win}
         />
       </div>
     </section>
