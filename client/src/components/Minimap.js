@@ -10,7 +10,7 @@ const colors = { Radiant: 'limegreen', Dire: 'darkgreen' };
 const Minimap = (props) => {
   return (
     <div
-      className="relative bg-center bg-cover w-[400px] h-[400px]"
+      className="relative bg-center bg-cover w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] mx-auto"
       style={{ backgroundImage: `url(/map.webp)` }}
     >
       {buildingTypes.map((type) =>
