@@ -43,7 +43,7 @@ const getMatchDetails = async (req, res) => {
           hero_name:
             heroes.find((hero) => hero.id === player.hero_id).localized_name ||
             'Unknown',
-          account_name: idToNameMap[player.account_id],
+          account_name: idToNameMap[player.account_id] || 'Hidden',
         })),
       },
     });

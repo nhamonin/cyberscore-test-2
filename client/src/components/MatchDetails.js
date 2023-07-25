@@ -24,7 +24,7 @@ const MatchDetails = ({ matchData }) => {
   } = matchData;
 
   return (
-    <section className="flex flex-col justify-between md:flex-row bg-white rounded-lg shadow-md p-6">
+    <section className="flex flex-col justify-between md:flex-row bg-slate-50 rounded-lg shadow-md p-6">
       <div className="pr-6">
         {radiant_name && dire_name && (
           <h2 className="text-xl font-semibold">

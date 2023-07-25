@@ -12,7 +12,7 @@ function App() {
   const [error, setError] = useState(null);
 
   return (
-    <div className="container mx-auto min-h-screen flex flex-col justify-start items-center pt-10">
+    <div className="container max-w-7xl mx-auto min-h-screen flex flex-col justify-start items-center pt-10">
       <div className="mb-4 flex justify-center flex-col">
         <h1 className="text-4xl font-bold mb-8 text-center">
           Dota 2 Match Data
