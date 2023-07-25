@@ -26,10 +26,20 @@ const getMatchDetails = async (req, res) => {
 
     res.json({
       result: {
-        ...data.result,
+        radiant_name: data.result.radiant_name,
+        dire_name: data.result.dire_name,
+        match_id: data.result.match_id,
+        radiant_score: data.result.radiant_score,
+        dire_score: data.result.dire_score,
+        tower_status_radiant: data.result.tower_status_radiant,
+        tower_status_dire: data.result.tower_status_dire,
+        barracks_status_radiant: data.result.barracks_status_radiant,
+        barracks_status_dire: data.result.barracks_status_dire,
+        radiant_win: data.result.radiant_win,
         duration: formatTime(data.result.duration),
         players: data.result.players.map((player) => ({
-          ...player,
+          account_id: player.account_id,
+          team_number: player.team_number,
           hero_name:
             heroes.find((hero) => hero.id === player.hero_id).localized_name ||
             'Unknown',
